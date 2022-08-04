@@ -22,9 +22,9 @@
           for(let i=0; i < data.length; i++){
           output.innerHTML += `
           ${data[i].product_id}<br/>
-          ${data[i].stock}<br/>
+          Stock:${data[i].stock}<br/>
           ${data[i].name}<br/>
-          ${data[i].price}<br/>
+          $${data[i].price}<br/>
           <img src="${data[i].image}"><br/>
           `}
         });
