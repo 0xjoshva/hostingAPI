@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>USERS</h1> <a href="login.html">Login</a>
+    <table id="output">
+    <tr>
+    <th>user_id</th>
+    <th>email</th>
+    <th>password</th>
+    <th>full_name</th>
+    <th>billing_address</th>
+    <th>default_shipping_address</th>
+    <th>country</th>
+    <th>phone</th>
+    <th>user_type</th>
+  </tr>
+  </table>
+    <a href="products.html">View Products</a>
+    <script type="text/javascript">
+      fetch("http://localhost:6969/users", {
+      })
+        .then((res) => res.json())
+        .then((data) => {
+
+          const output = document.getElementById("output");
+          for(let i=0; i < data.length; i++){
+          output.innerHTML += `
+    <td>${data[i].user_id}</td>
+    <td>${data[i].email}</td>
+    <td>${data[i].password}</td>
+    <td>${data[i].full_name}</td>
+    <td>${data[i].billing_address}</td>
+    <td>${data[i].default_shipping_address}</td>
+    <td>${data[i].country}</td>
+    <td>${data[i].phone}</td>
+    <td>${data[i].user_type}</td>
+    `}
+  });
+ 
+   </script>
+   <style> 
+   body{
+    width: 100%;
+    height: 100vh;
+    font-family:Helvetica, sans-serif;
+   }
+   a{ margin-top: 800px;
+    background: rgb(7, 118, 174);
+     text-decoration: none;
+     color: white;
+     padding: 12px 24px;
+     font-family: Arial, Helvetica, sans-serif;
+ }
+ #output {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 90vw;
+  margin-top:2rem;
+  margin-bottom: 2rem;
+}
+
+ #output td,  #output th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+ #output tr:nth-child(even){background-color: #f2f2f2;}
+
+ #output tr:hover {background-color: #ddd;}
+
+ #output th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #1c6ed2;
+  color: white;
+}
+ </style>
+  </body>
+</html>
