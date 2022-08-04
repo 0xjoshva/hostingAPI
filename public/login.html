@@ -1,60 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-  </head>
-  <body>
-    <form id="form">
-      <label for="email"
-        >e-mail
-        <input
-          name="email"
-          type="text"
-          id="email"
-          value="joshuasteed123@gmail.com"
-          required
-        />
-      </label>
-      <label for="pass"
-        >password
-        <input
-          name="password"
-          type="text"
-          id="password"
-          required
-          value="password101"
-        />
-      </label>
-      <button id="btn" type="submit">Login</button>
-    </form>
+</head>
+<body>
+    <div id="output">
 
+    </div>
     <script>
-      const form = document.getElementById("form");
+        let login = document.getElementById("output").innerHTML = `
+        <form id="form">
+            <label>Email</label>
+            <input type="text" name="email" placeholder="email" id="email"/>
+            <label>Password</label>
+            <input type="text" name="password" placeholder="password" id="password"/>
+            <button type="button" id="btn">Login</button>
+            <a href="register.html"><p>Register</p></a>
+            <a href="forgotPass.html"><p>Forgot password</p></a>
+        </form>
+        `
+        //login functionality
+btn.addEventListener("click", myFunction);
+        
 
-      form.addEventListener("submit", async function (e) {
-        e.preventDefault();
+async function  myFunction() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
 
-        let email = document.getElementById("email").value;
-        let password = document.getElementById("password").value;
+    const res = await fetch("http://localhost:6969/users/login",
+{
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify({email: email,
+         password: password})
+         
+})
+if(password.value === false){
+    console.log("incorrect password value")
+}else if(email.value === false){
+    console.log("incorrect email value")
+} else (console.log("correct"))
+}
 
-        const res = await fetch("http://localhost:6969/users/login", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
-        });
+let searchBar = document.getElementById("search").innerHTML = `
+<input type="text" name="searchBar" id="searchBar" placeholder="Search:" />
+`
 
-        const data = await res.json();
 
-        console.log(data);
-      });
     </script>
-  </body>
+    <style>
+        #output{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            
+        }
+        form{
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            padding: 20px;
+            gap: 10px;
+        }
+        #searchBar{
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+    </style>
+</body>
 </html>
